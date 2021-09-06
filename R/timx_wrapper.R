@@ -11,7 +11,7 @@ timx_wrapper <- function(op, var, infile, outfile, nc34, overwrite,
 
   ##### extract data from file #####
   file_data <- read_file(infile, var)
-  if (op %in% c("mean", "sum", "sd", "pctl")) {
+  if (op %in% c("mean", "sum", "sd", "pctl","avg")) {
     file_data$variable$prec <- "float"
   }
 
@@ -38,12 +38,13 @@ timx_wrapper <- function(op, var, infile, outfile, nc34, overwrite,
   nc_format <- get_nc_version(nc34)
 
   cmsaf_info <- switch(op,
-         max = {"cmsaf::timmax"},
-         min = {"cmsaf::timmin"},
-         mean = {"cmsaf::timmean"},
-         sum = {"cmsaf::timsum"},
-         sd = {"cmsaf::timsd"},
-         pctl = {paste0("cmsaf::timpctl with p = ", p)}
+         max = {"cmsafops::timmax"},
+         min = {"cmsafops::timmin"},
+         mean = {"cmsafops::timmean"},
+         sum = {"cmsafops::timsum"},
+         sd = {"cmsafops::timsd"},
+         pctl = {paste0("cmsafops::timpctl with p = ", p)},
+		 avg = {"cmsafops::timavg"}
   )
   cmsaf_info <- paste0(cmsaf_info, " for variable ", file_data$variable$name)
 

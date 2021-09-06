@@ -1,6 +1,6 @@
 Package: cmsafops
 Title: Tools for CM SAF NetCDF Data
-Version: 1.1.1
+Version: 1.2.0
 Authors@R: 
     person(given = "Steffen",
            family = "Kothe",
@@ -28,12 +28,11 @@ Imports: assertthat (>= 0.2.1), fields (>= 10.3), FNN (>= 1.1), ncdf4
         progress, trend, SearchTrees, utils
 NeedsCompilation: no
 Repository: CRAN
-LazyData: true
 Suggests: cmsaf, cmsafvis, spelling (>= 2.1), testthat (>= 2.3)
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 Language: en-US
-Packaged: 2021-02-18 06:47:13 UTC; stkothe
+Packaged: 2021-09-06 07:16:55 UTC; stkothe
 Author: Steffen Kothe [aut, cre]
 Maintainer: Steffen Kothe <Steffen.Kothe@dwd.de>
-Date/Publication: 2021-02-18 17:20:06 UTC
+Date/Publication: 2021-09-06 08:40:12 UTC
