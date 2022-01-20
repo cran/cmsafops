@@ -1,11 +1,11 @@
-158313b35dc7b3ca150fac2a7a9571d4 *DESCRIPTION
+59af5a2fa62094fb7126260bab137754 *DESCRIPTION
 ad28e835a1b104706fdca9fe9441aa12 *NAMESPACE
-a5d1546d7aedee7a139c42065574e029 *NEWS.md
+26c7f8af67b1d682ff6b554ac6e15845 *NEWS.md
 5cd1d89d068ac1393b5e06fcb11306e3 *R/acsaf_box_mergetime.R
 bfe51f01381d27d480d80ac3007add20 *R/add_grid_info.R
 2476bb6e018e09eae843cd4dc8bbc2e9 *R/arith_wrapper.R
 0f88ab7ca3908383e1b5d2517bee28cc *R/arithc_wrapper.R
-9fb68df8bcdc48975141ea6d2158767f *R/box_mergetime.R
+e173778152c8bbc165ee103659535990 *R/box_mergetime.R
 df072702fb185e94d022dafcf6aedbbd *R/calc_allDatesNc.R
 e250792621faf60f200c54178fa6bb65 *R/calc_field.R
 5f4b338662444d3f32faa5ee3a2a0d85 *R/calc_overlapping_time.R
@@ -117,7 +117,7 @@ ffb995d7ca633038cd9e1c81695059bf *R/is_url.R
 c1f3ce0968e579660a7f63c390d7fe47 *R/levbox_mergetime.R
 3a3d00b809b86c435a5a235c182e757a *R/mermean.R
 c7c73c470795a2183b075b00d76a42ec *R/merx_wrapper.R
-c513466f4643ca928de941a757c6a749 *R/mon.anomaly.R
+6d3bec3eb41ae8397e73241d6e8c9778 *R/mon.anomaly.R
 7e6bf376a05ad0cd16ab47c009dd3099 *R/mon.anomaly.climatology.R
 02cebd068e36de6a21a2ceee19e2915d *R/mon_num_above.R
 4c9c379cc9aa7cd0657c7cfd90df7b55 *R/mon_num_below.R
@@ -166,7 +166,7 @@ a35c46cfb4e1fd0f4cc0b28b9a331b0b *R/seasx_wrapper.R
 813a6d59dcf85e714cfd89219521cee1 *R/selmon.R
 0ab85d782dc218abc9d7996ea44d3a47 *R/selperiod.R
 3a5261c8c943ffc6094e6ae30352fb30 *R/selpoint.R
-82c0e198d7a476b6b8d48fe653fd6fc4 *R/selpoint.multi.R
+619204cb3dd0c92820163324bf920f25 *R/selpoint.multi.R
 ef39317c7a857a42fc13b41fba7b24e5 *R/seltime.R
 30ac58919ed22be8a21548c10d105df4 *R/selyear.R
 1d6715fe7d7c013c4b5531735287ba23 *R/set_seasons.R
@@ -230,7 +230,7 @@ f5eec34b9e8e3c5fe1a5a0ff176fac24 *R/yseasx_wrapper.R
 89b3a45a64ff87c1e62f37a6bd41072b *R/zonmean.R
 0bb8b5966c7fb07a00017e473157dc11 *R/zonsum.R
 a60d036b87b5524f564fb456527370c1 *R/zonx_wrapper.R
-3852cd8ad6b27e082c5577827e4a91fe *build/partial.rdb
+efaec01f079b750f9e9b9cf9c6402f73 *build/partial.rdb
 f828277603a874b45e21bafcc4888479 *inst/WORDLIST
 2e44b2d75d5ee1bb7b375c700d7a1423 *man/acsaf_box_mergetime.Rd
 9fe21d24794f79a9e4c8b173df82cd46 *man/add_grid_info.Rd
@@ -336,7 +336,7 @@ ad7eb83e6f0a6e2a8f01c91b37feccb5 *man/seassum.Rd
 f38db89424a119d519eccfcbd241ec17 *man/selmon.Rd
 6f2c0be1ad73fc11bb61a6bbd9d01abf *man/selperiod.Rd
 806f23797fdc6b0c8942607a60318d24 *man/selpoint.Rd
-8e03c422d283bc4f9315adde7dea78cb *man/selpoint.multi.Rd
+edebda84221a6a53410a796c21ffa013 *man/selpoint.multi.Rd
 197f027d6640686f9e29ea3a1ca199bb *man/seltime.Rd
 4716cf2966d15c7f2bd55d3fcad41cd2 *man/selyear.Rd
 e77d9bf2d47a30510a57637cf750c502 *man/timavg.Rd
@@ -460,7 +460,7 @@ f11458f1131bc4efcebfe89e818822d7 *tests/testthat.R
 bd0851cb2100c4174608dd32455c4dda *tests/testthat/create_testdata.R
 2768a87c65fe9d00633e59cf9e3bb36a *tests/testthat/helper.R
 59d96a995c7490444a97c5ebf87c5cb4 *tests/testthat/test_add_grid_info.R
-95e7c13270ee24f9fbad5e15a3b457fc *tests/testthat/test_box_mergetime.R
+09d84d310095f02b0639cec9f825b476 *tests/testthat/test_box_mergetime.R
 dfd29149c6b8504e6c3e1c851544a289 *tests/testthat/test_change_att.R
 7ac583069ac1a8c1f6ab2f375cb1819d *tests/testthat/test_cmsaf.abs.R
 8a031937596ed50dd0d787b69b1d247d *tests/testthat/test_cmsaf.add.R
