@@ -1,11 +1,11 @@
-59af5a2fa62094fb7126260bab137754 *DESCRIPTION
+ee07abb5d8916c78fb5ea6e0ac093f86 *DESCRIPTION
 ad28e835a1b104706fdca9fe9441aa12 *NAMESPACE
-26c7f8af67b1d682ff6b554ac6e15845 *NEWS.md
+7988ac06489fce2a50a73e2afde13917 *NEWS.md
 5cd1d89d068ac1393b5e06fcb11306e3 *R/acsaf_box_mergetime.R
 bfe51f01381d27d480d80ac3007add20 *R/add_grid_info.R
 2476bb6e018e09eae843cd4dc8bbc2e9 *R/arith_wrapper.R
 0f88ab7ca3908383e1b5d2517bee28cc *R/arithc_wrapper.R
-e173778152c8bbc165ee103659535990 *R/box_mergetime.R
+0db54795d6cc06d3bc4e958e0aca081f *R/box_mergetime.R
 df072702fb185e94d022dafcf6aedbbd *R/calc_allDatesNc.R
 e250792621faf60f200c54178fa6bb65 *R/calc_field.R
 5f4b338662444d3f32faa5ee3a2a0d85 *R/calc_overlapping_time.R
@@ -177,7 +177,7 @@ c797b1ef03b7cbd5976a72df5bb2337e *R/simplelm.R
 3e0ee02eeab4d92658bc704e81c48897 *R/timavg.R
 fcc2e8065a478c620b56c4710f1a782f *R/timcor.R
 91d0aa463a516abe943ced794daaa47b *R/timcovar.R
-3b2a05bd08454164cb56c0243e895589 *R/timcumsum.R
+68a681c0f990e069e89ca17737ba43e9 *R/timcumsum.R
 ae76bc1b3ad5307690e59eb9d7bc9a34 *R/timmax.R
 7c94d06cc679eca32220db6949fd5bc0 *R/timmean.R
 163e1da3f6949bfcd004e8092badc644 *R/timmin.R
@@ -230,8 +230,8 @@ f5eec34b9e8e3c5fe1a5a0ff176fac24 *R/yseasx_wrapper.R
 89b3a45a64ff87c1e62f37a6bd41072b *R/zonmean.R
 0bb8b5966c7fb07a00017e473157dc11 *R/zonsum.R
 a60d036b87b5524f564fb456527370c1 *R/zonx_wrapper.R
-efaec01f079b750f9e9b9cf9c6402f73 *build/partial.rdb
-f828277603a874b45e21bafcc4888479 *inst/WORDLIST
+018da22a3464c293e7a5c045c5f4a5b9 *build/partial.rdb
+f391152d6dde98cf693f6f5177c71e0c *inst/WORDLIST
 2e44b2d75d5ee1bb7b375c700d7a1423 *man/acsaf_box_mergetime.Rd
 9fe21d24794f79a9e4c8b173df82cd46 *man/add_grid_info.Rd
 6f6be2333eb39414210cc0b17bcc23e4 *man/box_mergetime.Rd
