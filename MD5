@@ -1,6 +1,6 @@
-d9923606091ae7617b6312198146204b *DESCRIPTION
+ce4fa5e52fe50188a523a1516fc11528 *DESCRIPTION
 5952b070351633d9944b4a7bad42d913 *NAMESPACE
-af4193fde0c9f80123f60a5b1fb320ca *NEWS.md
+93ab7a4a7f1d675040d9c5452341e29e *NEWS.md
 f38376d407ad7fa0d0aada88f6d0e6d1 *R/acsaf_box_mergetime.R
 bfe51f01381d27d480d80ac3007add20 *R/add_grid_info.R
 c6665510742a3aa1f5eaea30ea2977f6 *R/arith_wrapper.R
@@ -13,7 +13,7 @@ bca1e6c608aae8400e854db50ac91736 *R/calc_regres_coef_a.R
 02002d2160f157a6a6442afbea3c50a0 *R/calc_regres_coef_b.R
 2d14d23985a36d3ae926295f42f24e9d *R/calc_timestepNc.R
 0a023a9525c99dec3d77370995e5c917 *R/calc_timx_result.R
-315a4960c13ab5368ef69e6362c51383 *R/calc_trend.R
+1105583f93d0cb96f6224b5c0e04bd78 *R/calc_trend.R
 e24d53332c55280b3e90e2b6d0faa779 *R/calc_trend_advanced.R
 edc704dc7c4662bc0e7ce045458350d2 *R/change_att.R
 d1f41edbab241e42c698b8f6a178d91b *R/check.coordinate.system.R
@@ -39,12 +39,12 @@ d71d46838f9e6e4a59c6067a2359428d *R/cmsaf.mk.test.R
 aeb4f4956db0ad81f2c28879c0218ada *R/cmsaf.mulc.R
 96df0b156f64062354db1ffa38f4ba80 *R/cmsaf.regres.R
 2b43254980f152eb4dbd3e0932fd6ef1 *R/cmsaf.stats.R
-662a2f5411faa82f36685e38bc0ae817 *R/cmsaf.stats.station.data.R
+db03f481962e33fabb699e8154348b11 *R/cmsaf.stats.station.data.R
 d8701a3875ffd1a3d105313c5cf1bfe6 *R/cmsaf.sub.R
 9210cd6e64675aca6e4a74cfbcc4c95f *R/cmsaf.sub.rel.R
 7292ddf9c40c017fd133ef4ab2f824a0 *R/cmsaf.subc.R
 4609cb11c9b021a2aedec3f415558f26 *R/cmsaf.transform.coordinate.system.R
-6a8a75ae35e4f9534da6923af8212a60 *R/cmsafops.R
+e0bcbb8644396ee30bb9686baa0efdcf *R/cmsafops.R
 496e9ea35e8f66a99b2a909507d260d8 *R/constants.R
 db97d88c3895a934a7b8c1562b61fd72 *R/correct_filename.R
 8c88cba5f662aeefba29a5704b6e0012 *R/dayavg.R
@@ -111,7 +111,7 @@ ab43f13fabbeb45f407cba9b9999979d *R/gridboxmin.R
 c1e8c2bd743728a3d6ee67e6442327c6 *R/gridboxx_wrapper.R
 0a879b42df0f3bc9194cd7259f07a87d *R/hourmean.R
 83f2b29176d2d4f0832c5533e931a6b9 *R/hoursum.R
-9fe9812f0c48ae0246f3773c5e031298 *R/hourx_wrapper.R
+2462aab1d312305c23c4821c0125188b *R/hourx_wrapper.R
 892ad89a42efcb9dcff8dd251ed4d9d8 *R/is_leap_year.R
 061fdc8305efebae03aa9e77a9f80b92 *R/is_url.R
 0ca620b9d6d927dfc6eb3c0da1c37664 *R/levbox_mergetime.R
@@ -124,7 +124,7 @@ aa2f7b2e41a5c08b1fd85b4cb894c4f6 *R/merx_wrapper.R
 21e2857647280f10821b912e90de5fa6 *R/mon_num_equal.R
 6d4b79a98a446a7c4ebeb9f2f0aeb5d7 *R/mon_num_wrapper.R
 6f24ce92adc9c169bc16f158b1af85fc *R/monavg.R
-d620fbc39dc1acbbf82b49f6345786b9 *R/mondaymean.R
+01bc0c9784550ba80d7001148446754a *R/mondaymean.R
 f8020b97980b31cd3c259a3f0d557cd0 *R/monmax.R
 0b8d622b1ce62c5331410bb0adbed925 *R/monmean.R
 21399dbcfd8ee902ce3326c27b9e5aec *R/monmin.R
@@ -165,8 +165,8 @@ cf039afd66343caf3797914f83924a28 *R/seasx_wrapper.R
 7427117ce30869b2bf29261b3a27ebb8 *R/sellonlatbox.R
 c99cba80fdc14ee489a684236599bcee *R/selmon.R
 dd70c8f232646177a779582c67517971 *R/selperiod.R
-8012fb3ea0a79cb1dbfa160db4379c33 *R/selpoint.R
-5e58b5e8e10c86a5af0a21a7f67b852c *R/selpoint.multi.R
+6407ae30d97b270d4a6f1e90001cd206 *R/selpoint.R
+9fade98980678aa844e4acdcbc2c7bab *R/selpoint.multi.R
 11a7a4c74abb67749eefce92199bb036 *R/seltime.R
 515b88d05e2ce6ecfbcbf03019deabfb *R/selyear.R
 1d6715fe7d7c013c4b5531735287ba23 *R/set_seasons.R
@@ -230,7 +230,6 @@ b1feffe129eccaf094913345a1ce68f3 *R/ymonx_wrapper.R
 535bafe301afd3d0792de7003e5f4c6f *R/zonmean.R
 d23d845a9a8c07277e2807f156286e30 *R/zonsum.R
 dda66566501790168e63f19cba59b821 *R/zonx_wrapper.R
-0c6ad5b3446721162c89589e8077ab1c *build/partial.rdb
 89c85af9abd68de569ea5bc7ab73e915 *inst/WORDLIST
 2e44b2d75d5ee1bb7b375c700d7a1423 *man/acsaf_box_mergetime.Rd
 9fe21d24794f79a9e4c8b173df82cd46 *man/add_grid_info.Rd
@@ -258,7 +257,7 @@ ae62116d5ef18fa0fb616dfaef3cb012 *man/cmsaf.sub.Rd
 53c381fd0f01ba7de900cc6fbabc6704 *man/cmsaf.sub.rel.Rd
 f904ca5407d8fa9f62807d2b50b3d921 *man/cmsaf.subc.Rd
 44392179193d49949d0a4fcbe37e91f7 *man/cmsaf.transform.coordinate.system.Rd
-8855c39ce4ecd4d35b497bf56c2eacdb *man/cmsafops.Rd
+291fc301582ad2268d82b1a3ab1ef15b *man/cmsafops-package.Rd
 84b54b9a78da9bfdd76f6472c2c11f19 *man/dayavg.Rd
 81fe7016d82f0d9ce72081613aba2979 *man/daymax.Rd
 e58fb4fdde9d501dedb3b7e2902e3b55 *man/daymean.Rd
