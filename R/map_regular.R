@@ -1,128 +1,102 @@
 #' Grid interpolation.
 #'
-#' The function interpolates the data of infile1 to the grid of infile2. From
-#' infile2 only the grid information is used.
+#' The function interpolates the irregular gridded data of infile using grid information
+#' of auxfile. The intention of this function is to remap CLAAS level-2 data onto a 
+#' regular gridded lon / lat grid.
 #' By default, a nearest neighbor interpolation provided by
-#' \code{\link[FNN:get.knn]{get.knnx}} is used. For interpolation between
-#' regular grids a simple bilinear interpolation as provided by
-#' \code{\link[fields:interp.surface]{interp.surface.grid}} as well as a conservative
-#' remapping as provided by \code{\link[rainfarmr:remapcon]{remapcon}} can be chosen.
+#' \code{\link[FNN:get.knn]{get.knnx}} is used. 
 #'
 #' @param var Name of NetCDF variable (character).
-#' @param infile1 Filename of first input NetCDF file. This may include the
-#'   directory (character). The data of infile1 are interpolated.
-#' @param infile2 Filename of second input file. This may include the directory
-#'   (character). The grid information of infile2 are the target grid for the
-#'   interpolation. This File may also be an ASCII-File containing the grid
-#'   information.
+#' @param infile Filename of input NetCDF file (irregular gridded). This may include the
+#'  directory (character). The data of infile are interpolated.
+#' @param auxfile Filename auxiliary file. This may include the directory
+#'  (character). 
 #' @param outfile Filename of output NetCDF file. This may include the directory
-#'    (character).
-#' @param method Method used for remapping (character).
-#'  Options are "bilinear" for bilinear interpolation,
-#'  "conservative" for conservative remapping (only for regular grids, respectively)
-#'  and "nearest" for nearest-neighbor interpolation.
-#'  Default is "nearest".
+#'  (character).
+#' @param dxy Grid resolution of the regular output grid in degrees (numeric). Default is 0.05°.
 #' @param dxy_factor In case of nearest neighbor all grid points with distance > (dxy * dxy_factor) 
 #'  are set to NA (numeric). Default is 1.
+#' @param method Method used for remapping (character). Default and so far the only option
+#'  is "nearest" for nearest-neighbor interpolation.
 #' @param nc34 NetCDF version of output file. If \code{nc34 = 3} the output file will be
 #'  in NetCDFv3 format (numeric). Default output is NetCDFv4.
 #' @param overwrite logical; should existing output file be overwritten?
 #' @param verbose logical; if TRUE, progress messages are shown
-#' @param nc1 Alternatively to \code{infile1} you can specify the input as an
-#'  object of class `ncdf4` (as returned from \code{ncdf4::nc_open}).
-#' @param nc2 Alternatively to \code{infile2} you can specify the input as an
+#' @param nc Alternatively to \code{infile} you can specify the input as an
 #'  object of class `ncdf4` (as returned from \code{ncdf4::nc_open}).
 #'
-#' @return A NetCDF file including the interpolated data of infile1 on the grid of
-#' infile2 is written.
+#' @return A NetCDF file including the interpolated data of infile on a regular lon / lat grid
+#' with a spatial resolution of dxy.
 #' @export
 #'
-#'@family data manipulation functions
+#' @family data manipulation functions
 #'
-#' @examples
-#'## Create an example NetCDF file with a similar structure as used by CM
-#'## SAF. The file is created with the ncdf4 package.  Alternatively
-#'## example data can be freely downloaded here: <https://wui.cmsaf.eu/>
-#'
-#'library(ncdf4)
-#'
-#'## create some (non-realistic) example data
-#'
-#'lon <- seq(5, 15, 0.5)
-#'lat <- seq(45, 55, 0.5)
-#'lon2 <- seq(5, 15, 1)
-#'lat2 <- seq(45, 55, 1)
-#'time <- c(as.Date("2000-01-01"), as.Date("2001-02-01"))
-#'origin <- as.Date("1983-01-01 00:00:00")
-#'time <- as.numeric(difftime(time, origin, units = "hour"))
-#'data1 <- array(250:350, dim = c(21, 21, 1))
-#'data2 <- array(230:320, dim = c(21, 21, 1))
-#'
-#'## create two example NetCDF files
-#'
-#'x <- ncdim_def(name = "lon", units = "degrees_east", vals = lon)
-#'y <- ncdim_def(name = "lat", units = "degrees_north", vals = lat)
-#'t <- ncdim_def(name = "time", units = "hours since 1983-01-01 00:00:00",
-#'  vals = time[1], unlim = TRUE)
-#'var1 <- ncvar_def("SIS", "W m-2", list(x, y, t), -1, prec = "short")
-#'vars <- list(var1)
-#'ncnew <- nc_create(file.path(tempdir(),"CMSAF_example_file_1.nc"), vars)
-#'ncvar_put(ncnew, var1, data1)
-#'ncatt_put(ncnew, "lon", "standard_name", "longitude", prec = "text")
-#'ncatt_put(ncnew, "lat", "standard_name", "latitude", prec = "text")
-#'nc_close(ncnew)
-#'
-#'x <- ncdim_def(name = "lon", units = "degrees_east", vals = lon2)
-#'y <- ncdim_def(name = "lat", units = "degrees_north", vals = lat2)
-#'t <- ncdim_def(name = "time", units = "hours since 1983-01-01 00:00:00",
-#'  vals = time[1], unlim = TRUE)
-#'ncnew <- nc_create(file.path(tempdir(),"CMSAF_example_file_2.nc"), vars)
-#'ncvar_put(ncnew, var1, data2)
-#'ncatt_put(ncnew, "lon", "standard_name", "longitude", prec = "text")
-#'ncatt_put(ncnew, "lat", "standard_name", "latitude", prec = "text")
-#'nc_close(ncnew)
-#'
-#'## Interpolate the fields of both example CM SAF NetCDF file 1 to the
-#'## coarser grid of file 2 and write the result into one output file.
-#'remap(var = "SIS", infile1 = file.path(tempdir(),"CMSAF_example_file_1.nc"), 
-#'  infile2 = file.path(tempdir(),"CMSAF_example_file_2.nc"),
-#'  outfile = file.path(tempdir(),"CMSAF_example_file_remap.nc"))
-#'
-#'unlink(c(file.path(tempdir(),"CMSAF_example_file_1.nc"), 
-#'  file.path(tempdir(),"CMSAF_example_file_2.nc"),
-#'  file.path(tempdir(),"CMSAF_example_file_remap.nc")))
-remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor = 1, nc34 = 4,
-                  overwrite = FALSE, verbose = FALSE, nc1 = NULL, nc2 = NULL) {
-  calc_time_start <- Sys.time()
+map_regular <- function(var, infile, auxfile, outfile, dxy = 0.05, dxy_factor = 1, 
+                        method = "nearest", nc34 = 4, overwrite = FALSE, verbose = FALSE, 
+                        nc = NULL) {
 
   check_variable(var)
-  if (is.null(nc1)) check_infile(infile1)
-  if (is.null(nc2)) check_infile(infile2)
+  if (is.null(nc)) check_infile(infile)
   check_outfile(outfile)
   outfile <- correct_filename(outfile)
   check_overwrite(outfile, overwrite)
   check_nc_version(nc34)
+  check_infile(auxfile)
+  
   stopifnot(method %in% c("bilinear", "conservative", "nearest"))
+  
+  # define constants and names
+  LON_NAMES <- list(
+    LONG_DEFAULT = "longitude",
+    "Longitude",
+    "Lon",
+    DEFAULT = "lon"
+  )
+  
+  LAT_NAMES <- list(
+    LONG_DEFAULT = "latitude",
+    "Latitude",
+    "Lat",
+    DEFAULT = "lat"
+  )
 
   ##### extract data from file #####
-  file_data1 <- read_file(infile1, var, nc = nc1)
-  file_data1$variable$prec <- PRECISIONS_VAR$FLOAT
-  if (file_data1$time_info$has_time_bnds) {
-    time_bnds <- get_time_bounds_from_file(infile1, nc = nc1)
-  }
+  file_data1 <- read_file(infile, var)
+  
+  ### check if georef variable is available
+  goc <- NULL
+  nc_1 <- ncdf4::nc_open(infile)
+    if ("georef_offset_corrected" %in% names(nc_1$var)) {
+	    goc <- ncdf4::ncvar_get(nc_1, "georef_offset_corrected")
+	    goc <- goc + 1
+    }
+  
+    if (file_data1$time_info$has_time_bnds) {
+      time_bnds <- ncdf4::ncvar_get(nc_1, "time_bnds", collapse_degen = FALSE)
+    }
+  ncdf4::nc_close(nc_1)
+  
+  ##### extract data from file #####
+  nc_aux <- ncdf4::nc_open(auxfile)
+    lon <- ncdf4::ncvar_get(nc_aux, "lon")  #TODO be more resistant to different spellings
+	  if (!is.null(goc) && !is.na(dim(lon)[3])) {
+	    if (dim(lon)[3] > 1) lon <- lon[,,goc]
+	  }
+
+    lat <- ncdf4::ncvar_get(nc_aux, "lat")
+	  if (!is.null(goc) && !is.na(dim(lat)[3])) {
+	    if (dim(lat)[3] > 1) lat <- lat[,,goc]
+	  }
+    ncdf4::nc_close(nc_aux)
+  gc()
 
   nc_format <- get_nc_version(nc34)
-
-  if (endsWith(infile2, ".txt")) {
-    lonlat <- read_gridfile(infile2)
-    file_data2 <- list()
-    file_data2$grid <- list()
-    file_data2$dimension_data <- list(x = lonlat[[1]], y = lonlat[[2]])
-    file_data2$grid$is_regular <- TRUE
-
-  }else{
-    file_data2 <- read_file(infile2, NULL, nc = nc2)
-  }
+  
+  file_data2 <- list()
+  file_data2$grid <- list()
+  file_data2$dimension_data <- list(x = seq(min(lon,na.rm=T), max(lon, na.rm=T), dxy),
+                                    y = seq(min(lat,na.rm=T), max(lat, na.rm=T), dxy))
+  file_data2$grid$is_regular <- TRUE
 
   isReg1 <- file_data1$grid$is_regular
   isReg2 <- file_data2$grid$is_regular
@@ -133,8 +107,10 @@ remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor
 
   if (isReg1) {
     ref <- list(file_data1$dimension_data$x, file_data1$dimension_data$y)
-  }else{
-    ref <- list(file_data1$grid$vars_data[[LON_NAMES$DEFAULT]],
+  } else if (!is.null(goc) || !is.null(lon)) {
+      ref <- list(lon, lat)
+  } else{
+      ref <- list(file_data1$grid$vars_data[[LON_NAMES$DEFAULT]],
                 file_data1$grid$vars_data[[LAT_NAMES$DEFAULT]])
   }
 
@@ -150,8 +126,6 @@ remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor
       ifelse(ref[[1]] > 180, -360 + ref[[1]], ref[[1]])
   }
 
-  dxy <- LON_RANGE
-
   lon_limit <- which(ref2[[1]] > (min(ref[[1]], na.rm = TRUE) - dxy) & ref2[[1]]
                      < (max(ref[[1]], na.rm = TRUE) + dxy), arr.ind = TRUE)
   lat_limit <- which(ref2[[2]] > (min(ref[[2]], na.rm = TRUE) - dxy) & ref2[[2]]
@@ -163,25 +137,15 @@ remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor
   }
 
   if (isReg2) {
-    x_dim_name <- LON_NAMES$DEFAULT
-    y_dim_name <- LAT_NAMES$DEFAULT
-    x_dim_unit <- UNITS$DEGREES_EAST
-    y_dim_unit <- UNITS$DEGREES_NORTH
-
     file_data2$dimension_data$x <- file_data2$dimension_data$x[lon_limit]
     file_data2$dimension_data$y <- file_data2$dimension_data$y[lat_limit]
 
   }else{
-    x_dim_name <- X_NAMES$DEFAULT
-    y_dim_name <- Y_NAMES$DEFAULT
-    x_dim_unit <- UNITS$KILOMETER
-    y_dim_unit <- UNITS$KILOMETER
-
     lonlat_merge <- data.matrix(merge(lon_limit, lat_limit,
                                       by.x = c("row", "col"),
                                       by.y = c("row", "col"),
                                       out.class = matrix))
-
+    
     x_range <- which(file_data2$dimension_data$x %in% file_data2$dimension_data$x[lonlat_merge[, 1]])
     y_range <- which(file_data2$dimension_data$y %in% file_data2$dimension_data$y[lonlat_merge[, 2]])
 
@@ -199,11 +163,10 @@ remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor
 
   if (file_data1$time_info$has_time_bnds) {
     vars_data <- list(result = result, time_bounds = time_bnds[, 1])
-  }else{
+  } else {
     vars_data <- list(result = result)
   }
-
-  cmsaf_info <- (paste0("cmsafops::remap for variable ", file_data1$variable$name))
+  cmsaf_info <- (paste0("cmsafops::map_regular for variable ", file_data1$variable$name))
 
   ##### prepare output #####
   global_att_list <- names(file_data1$global_att)
@@ -239,10 +202,9 @@ remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor
   )
 
   ##### calculate and write result #####
-  if (!is.null(nc1)) nc_in <- nc1
-  else nc_in <- nc_open(infile1)
+  if (!is.null(nc)) nc_in <- nc else nc_in <- nc_open(infile)
   nc_out <- nc_open(outfile, write = TRUE)
-
+  
   ref_vec1 <- as.vector(ref[[1]])
   ref_vec2 <- as.vector(ref[[2]])
 
@@ -252,7 +214,7 @@ remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor
   if (file_data1$time_info$has_time_bnds) {
     vars_data$time_bounds <- time_bnds
   }
-
+  
   if (method == "nearest") {
     if (isReg1 && isReg2) {
       fnn_a <- FNN::get.knnx(ref[[1]], file_data2$dimension_data$x, k = 1)
@@ -275,7 +237,6 @@ remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor
       fnn_target <- match(target_ref1[fnn$nn.index], target1)
     }
   }
-
   for (i in seq_len(length(file_data1$dimension_data$t))) {
     rdata <- ncvar_get(nc_in, file_data1$variable$name, start = c(1, 1, i), count = c(-1, -1, 1))
 
@@ -314,17 +275,19 @@ remap <- function(var, infile1, infile2, outfile, method = "nearest", dxy_factor
                                                      ))$z
              })
 
-    result[is.na(result)] <- file_data1$variable$attributes$missing_value
+    result[result == file_data1$variable$attributes$missing_value] <- NA  
     ncvar_put(nc_out, vars[[1]], result, start = c(1, 1, i), count = c(-1, -1, 1))
     ncvar_put(nc_out, dims$t, file_data1$dimension_data$t[i], start = i, count = 1)
     if (file_data1$time_info$has_time_bnds) {
       ncvar_put(nc_out, vars[[2]], vars_data$time_bounds[, i], start = c(1, i), count = c(-1, 1))
     }
-  }
-
+  }  
+  
   nc_close(nc_out)
-  if (is.null(nc1)) nc_close(nc_in)
-
-  calc_time_end <- Sys.time()
-  if (verbose) message(get_processing_time_string(calc_time_start, calc_time_end))
+  if (is.null(nc)) nc_close(nc_in)
+  result <- result[,,1]
+  lo1 <- file_data2$dimension_data$x
+  la1 <- file_data2$dimension_data$y
+    
+  remap_data <- list(lon = lo1, lat = la1, data = result)
 }

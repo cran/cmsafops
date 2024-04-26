@@ -10,6 +10,7 @@ remap(
   infile2,
   outfile,
   method = "nearest",
+  dxy_factor = 1,
   nc34 = 4,
   overwrite = FALSE,
   verbose = FALSE,
@@ -36,6 +37,9 @@ Options are "bilinear" for bilinear interpolation,
 "conservative" for conservative remapping (only for regular grids, respectively)
 and "nearest" for nearest-neighbor interpolation.
 Default is "nearest".}
+
+\item{dxy_factor}{In case of nearest neighbor all grid points with distance > (dxy * dxy_factor)
+are set to NA (numeric). Default is 1.}
 
 \item{nc34}{NetCDF version of output file. If \code{nc34 = 3} the output file will be
 in NetCDFv3 format (numeric). Default output is NetCDFv4.}
@@ -122,6 +126,7 @@ Other data manipulation functions:
 \code{\link{add_grid_info}()},
 \code{\link{box_mergetime}()},
 \code{\link{cmsaf.transform.coordinate.system}()},
-\code{\link{levbox_mergetime}()}
+\code{\link{levbox_mergetime}()},
+\code{\link{map_regular}()}
 }
 \concept{data manipulation functions}
