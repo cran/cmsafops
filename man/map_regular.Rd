@@ -11,6 +11,10 @@ map_regular(
   outfile,
   dxy = 0.05,
   dxy_factor = 1,
+  min_lon = -80,
+  max_lon = 80,
+  min_lat = -80,
+  max_lat = 80,
   method = "nearest",
   nc34 = 4,
   overwrite = FALSE,
@@ -34,6 +38,14 @@ directory (character). The data of infile are interpolated.}
 
 \item{dxy_factor}{In case of nearest neighbor all grid points with distance > (dxy * dxy_factor)
 are set to NA (numeric). Default is 1.}
+
+\item{min_lon}{Minimum longitude}
+
+\item{max_lon}{Maximum longitude}
+
+\item{min_lat}{Minimum latitude}
+
+\item{max_lat}{Maximum latitude}
 
 \item{method}{Method used for remapping (character). Default and so far the only option
 is "nearest" for nearest-neighbor interpolation.}

@@ -1,5 +1,9 @@
 # Changelog for cmsafops package
 
+## 1.4.1
+- Bug fix: in case of just one missing value, `timcumsum` could give an error
+- Bug fix: `timcor` and `timcovar` generated rubbish
+
 ## 1.4.0
 - New operator: `ymonmedian`
 - Improve time sorting in `cmsaf.cat`
