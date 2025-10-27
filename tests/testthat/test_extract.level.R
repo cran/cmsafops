@@ -325,3 +325,15 @@ test_that("level = 'all' creates three files (5x5x3x2)", {
   expect_identical(ncvar_get(f1, "lat"), array(seq(45, 47, 0.5)))
   expect_equal(ncvar_get(f1, "time"), array(c(149016, 149760)))
 })
+
+test_that("level='all' writes into dirname(outfile)", {
+  tmp <- file.path(tempdir(), paste0("cmsafops-", as.integer(runif(1,1,1e9))))
+  dir.create(tmp, recursive=TRUE, showWarnings=FALSE)
+  infile  <- td_in("ex_extract.level.nc")
+  outfile <- file.path(tmp, "extract_level_all.nc")
+  cmsafops::extract.level("SIS", infile, outfile, level = "all")
+  expect_true(file.exists(file.path(tmp, "extract_level_all_level1.nc")))
+  expect_true(file.exists(file.path(tmp, "extract_level_all_level2.nc")))
+  expect_true(file.exists(file.path(tmp, "extract_level_all_level3.nc")))
+})
+

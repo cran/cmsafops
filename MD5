@@ -1,6 +1,6 @@
-d81bb02792e6da8bff898742b1163f8a *DESCRIPTION
+cd36504fe802f4c9bd1f8fadb8aa0c48 *DESCRIPTION
 a71c5cc8adeeb962f4f49b5a565ce786 *NAMESPACE
-b014052d82f54121ed8c2c498e137056 *NEWS.md
+4e6dc9e169913f638668fcc928c7e30c *NEWS.md
 f38376d407ad7fa0d0aada88f6d0e6d1 *R/acsaf_box_mergetime.R
 e2752d84e3811d2e23144ab5160b53f3 *R/add_grid_info.R
 c6665510742a3aa1f5eaea30ea2977f6 *R/arith_wrapper.R
@@ -63,7 +63,7 @@ f68ec082159c99199894d744a28583a9 *R/define_vars_mk.test.R
 d9edaba348df4012761bf89fae09dca3 *R/define_vars_trend.R
 5709282c6604e73f5ed609672ae64c56 *R/define_vars_trend_advanced.R
 355121d2d31488104d4c7f23e28965c7 *R/divdpm.R
-2083dadd867f9d7ca2b2d7d6cc380d40 *R/extract.level.R
+af93ed5269420c00aca7914d2a648325 *R/extract.level.R
 65fab0bca9d5fd62a38e8ae8def61155 *R/extract.period.R
 d5714a875f039b7542c64bf1ad89a154 *R/fld_cor_covar_wrapper.R
 0ca4edebdd4b88bf33f6fe056d19e7b7 *R/fldcor.R
@@ -233,7 +233,7 @@ f61e90d3ccba32f42c6b25534cae2310 *R/ymonsd.R
 535bafe301afd3d0792de7003e5f4c6f *R/zonmean.R
 d23d845a9a8c07277e2807f156286e30 *R/zonsum.R
 dda66566501790168e63f19cba59b821 *R/zonx_wrapper.R
-fbe0f09424f9909eaa71870bb994466e *inst/WORDLIST
+d861360baabe9d404f0e3f3a0db97ff1 *inst/WORDLIST
 3ddf4b835345106401231fadb1299e2f *man/acsaf_box_mergetime.Rd
 bea7cfaa417ff122a2289f6dd476437c *man/add_grid_info.Rd
 87ba12992446cb3abc564cc2a7d4fa9d *man/box_mergetime.Rd
@@ -490,7 +490,7 @@ fb3c788a009f6123482ced79c416f3d4 *tests/testthat/test_daypctl.R
 89a83e33ee669c70605bfafc1f1c209a *tests/testthat/test_daysum.R
 d662be712016718bb88fc578ac3ecbfe *tests/testthat/test_dayvar.R
 ce11f4971355a4db3d4a60c5fd8caf7f *tests/testthat/test_divdpm.R
-2047cc2eaf388e51389a0566f5a47877 *tests/testthat/test_extract.level.R
+33afe5a6ebf063802dfb3c3b2fc59250 *tests/testthat/test_extract.level.R
 bf943b4a2d9573503d94ead19755f530 *tests/testthat/test_extract.period.R
 92541c677344b7558177fb89d406f572 *tests/testthat/test_fldcor.R
 43f05211bd1148f33fc189981048733d *tests/testthat/test_fldcovar.R
